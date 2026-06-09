@@ -17,5 +17,16 @@ export class ProfilePage implements OnInit {
 
   ngOnInit() {
   }
+ cambiarContrasena() {
+    alert('Se ha enviado un enlace de recuperación de contraseña al correo registrado.');
+  }
 
+  cerrarSesion() {
+    const confirmar = confirm('¿Desea cerrar sesión?');
+
+    if (confirmar) {
+      alert('Sesión cerrada correctamente');
+    }
+  }
+  
 }
