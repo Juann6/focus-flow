@@ -23,7 +23,7 @@
       </div>
 
       <!-- Form -->
-      <form (ngSubmit)="onSubmit()" #authForm="ngForm" class="form-content">
+      <form (ngSubmit)="onSubmit()" #authForm="ngForm" class="form-content" *ngIf="!isRecoveryMode">
 
         <!-- Name Field (Register Mode Only) -->
         <div class="input-group animate-slide-down" *ngIf="!isLoginMode">
@@ -47,6 +47,13 @@
           </button>
         </div>
 
+        <!-- Forgot Password Link (Only in Login Mode) -->
+        <div class="forgot-password-container" *ngIf="isLoginMode">
+          <a href="javascript:void(0)" class="forgot-link" (click)="toggleRecoveryMode(true)">
+            ¿Olvidaste tu contraseña?
+          </a>
+        </div>
+
         <!-- Submit Button -->
         <button type="submit" class="submit-btn">
           {{ isLoginMode ? 'INICIAR SESIÓN' : 'REGISTRARSE' }}
@@ -63,8 +70,68 @@
         </button>
       </form>
 
+      <!-- Recovery Forms -->
+      <div *ngIf="isRecoveryMode" class="form-content">
+        <!-- Step 1: Request code (Email input) -->
+        <div *ngIf="recoveryStep === 'email'" class="animate-slide-down">
+          <h2 class="recovery-title">Recuperar Contraseña</h2>
+          <p class="recovery-subtitle">Ingresa tu correo para recibir un código de verificación.</p>
+
+          <form (ngSubmit)="sendRecoveryCode()" #emailForm="ngForm" class="form-content">
+            <div class="input-group">
+              <input id="recoveryEmail" type="email" name="recoveryEmail" placeholder="Correo electrónico"
+                [(ngModel)]="recoveryEmail" required #recoveryEmailInput="ngModel" />
+            </div>
+
+            <button type="submit" class="submit-btn" [disabled]="!emailForm.form.valid">
+              ENVIAR CÓDIGO
+            </button>
+          </form>
+        </div>
+
+        <!-- Step 2: Verification and Reset Password -->
+        <div *ngIf="recoveryStep === 'reset'" class="animate-slide-down">
+          <h2 class="recovery-title">Restablecer Contraseña</h2>
+          <p class="recovery-subtitle">Ingresa el código enviado y tu nueva contraseña.</p>
+
+          <form (ngSubmit)="resetPassword()" #resetForm="ngForm" class="form-content">
+            <div class="input-group">
+              <input id="enteredCode" type="text" name="enteredCode" placeholder="Código de verificación"
+                [(ngModel)]="enteredCode" required #enteredCodeInput="ngModel" />
+            </div>
+
+            <div class="input-group password-group">
+              <input id="newPassword" [type]="showPassword ? 'text' : 'password'" name="newPassword" placeholder="Nueva contraseña (mín. 6 caracteres)"
+                [(ngModel)]="newPassword" required #newPasswordInput="ngModel" />
+              <button type="button" class="password-toggle" (click)="togglePasswordVisibility()"
+                [title]="showPassword ? 'Ocultar contraseña' : 'Mostrar contraseña'">
+                <ion-icon [name]="showPassword ? 'eye-off-outline' : 'eye-outline'"></ion-icon>
+              </button>
+            </div>
+
+            <div class="input-group password-group">
+              <input id="confirmPassword" [type]="showPassword ? 'text' : 'password'" name="confirmPassword" placeholder="Confirmar nueva contraseña"
+                [(ngModel)]="confirmPassword" required #confirmPasswordInput="ngModel" />
+            </div>
+
+            <button type="submit" class="submit-btn" [disabled]="!resetForm.form.valid">
+              RESTABLECER CONTRASEÑA
+            </button>
+          </form>
+        </div>
+
+        <!-- Return to Login Link -->
+        <div class="toggle-mode-container">
+          <span class="toggle-text">
+            <a href="javascript:void(0)" class="toggle-link" (click)="toggleRecoveryMode(false)">
+              Volver al inicio de sesión
+            </a>
+          </span>
+        </div>
+      </div>
+
       <!-- Toggle Mode Link -->
-      <div class="toggle-mode-container">
+      <div class="toggle-mode-container" *ngIf="!isRecoveryMode">
         <span class="toggle-text">
           {{ isLoginMode ? '¿No tienes cuenta? ' : '¿Ya tienes cuenta? ' }}
           <a href="javascript:void(0)" class="toggle-link" (click)="toggleMode()">

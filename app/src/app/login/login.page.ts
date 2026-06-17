@@ -30,6 +30,15 @@ export class LoginPage implements OnInit {
   email = '';
   password = '';
 
+  // Password Recovery Fields & States
+  isRecoveryMode = false;
+  recoveryStep: 'email' | 'reset' = 'email';
+  recoveryEmail = '';
+  generatedCode = '';
+  enteredCode = '';
+  newPassword = '';
+  confirmPassword = '';
+
   // Feedback Messages
   errorMessage = '';
   successMessage = '';
@@ -61,6 +70,7 @@ export class LoginPage implements OnInit {
 
   toggleMode() {
     this.isLoginMode = !this.isLoginMode;
+    this.isRecoveryMode = false;
     this.errorMessage = '';
     this.successMessage = '';
     this.name = '';
@@ -68,8 +78,95 @@ export class LoginPage implements OnInit {
     this.password = '';
   }
 
+  toggleRecoveryMode(enable: boolean) {
+    this.isRecoveryMode = enable;
+    this.recoveryStep = 'email';
+    this.errorMessage = '';
+    this.successMessage = '';
+    this.recoveryEmail = '';
+    this.enteredCode = '';
+    this.newPassword = '';
+    this.confirmPassword = '';
+    this.generatedCode = '';
+  }
+
   togglePasswordVisibility() {
     this.showPassword = !this.showPassword;
+  }
+
+  sendRecoveryCode() {
+    this.errorMessage = '';
+    this.successMessage = '';
+
+    if (!this.recoveryEmail) {
+      this.errorMessage = 'Por favor, ingresa tu correo electrónico.';
+      return;
+    }
+
+    const usersStr = localStorage.getItem('users') || '[]';
+    const users = JSON.parse(usersStr);
+    const userExists = users.some((u: any) => u.email.toLowerCase() === this.recoveryEmail.toLowerCase());
+
+    if (!userExists) {
+      this.errorMessage = 'El correo electrónico no está registrado.';
+      return;
+    }
+
+    // Generate a 4-digit verification code
+    const code = Math.floor(1000 + Math.random() * 9000).toString();
+    this.generatedCode = code;
+
+    // Simulate sending verification code via alert
+    this.successMessage = `¡Código de verificación enviado! Simulación: Usa el código ${code}`;
+
+    setTimeout(() => {
+      this.recoveryStep = 'reset';
+      this.errorMessage = '';
+      this.successMessage = '';
+    }, 3000);
+  }
+
+  resetPassword() {
+    this.errorMessage = '';
+    this.successMessage = '';
+
+    if (!this.enteredCode || !this.newPassword || !this.confirmPassword) {
+      this.errorMessage = 'Por favor, completa todos los campos.';
+      return;
+    }
+
+    if (this.enteredCode !== this.generatedCode) {
+      this.errorMessage = 'El código de verificación es incorrecto.';
+      return;
+    }
+
+    if (this.newPassword.length < 6) {
+      this.errorMessage = 'La nueva contraseña debe tener al menos 6 caracteres.';
+      return;
+    }
+
+    if (this.newPassword !== this.confirmPassword) {
+      this.errorMessage = 'Las contraseñas no coinciden.';
+      return;
+    }
+
+    const usersStr = localStorage.getItem('users') || '[]';
+    const users = JSON.parse(usersStr);
+    const userIndex = users.findIndex((u: any) => u.email.toLowerCase() === this.recoveryEmail.toLowerCase());
+
+    if (userIndex === -1) {
+      this.errorMessage = 'Error al actualizar la contraseña. Usuario no encontrado.';
+      return;
+    }
+
+    users[userIndex].password = this.newPassword;
+    localStorage.setItem('users', JSON.stringify(users));
+
+    this.successMessage = '¡Contraseña restablecida con éxito! Redirigiendo al inicio de sesión...';
+
+    setTimeout(() => {
+      this.toggleRecoveryMode(false);
+    }, 2000);
   }
 
   onSubmit() {
