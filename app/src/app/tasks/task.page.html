@@ -23,10 +23,12 @@
 
     <!-- FILTROS -->
     <section id="filtros">
-      <div id="todas">Todas</div>
-      <div id="pendientes">Pendientes</div>
-      <div id="completadas">Completadas</div>
-      <div id="vencidas">Vencidas</div>
+      <button id="todas" (click)="cambiarFiltro('todos')"
+      [ngClass]="{'activo': filtroActual === 'todos'}">Todas</button>
+      <button id="pendientes" (click)="cambiarFiltro('pendientes')"
+      [ngClass]="{'activo': filtroActual === 'pendientes'}">Pendientes</button>
+      <button id="completadas" (click)="cambiarFiltro('completadas')"
+      [ngClass]="{'activo': filtroActual === 'completadas'}">Completadas</button>
     </section>
 
     <button (click)="mostrarFormulario = true">
@@ -59,7 +61,7 @@
     <!-- LISTA DE TAREAS -->
     <section id="tareas">
 
-      <div class="tarea" *ngFor="let task of tasks">
+      <div class="tarea" *ngFor="let task of tasksFiltrados">
 
         <input type="checkbox" [(ngModel)]="task.completada" (change)="cambiarEstado(task)">
 

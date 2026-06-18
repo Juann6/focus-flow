@@ -41,6 +41,8 @@ export class TaskPage implements OnInit {
 
   mostrarFormulario = false;
 
+  filtroActual = 'todos';
+
   constructor() {}
 
   ngOnInit() {
@@ -135,6 +137,21 @@ export class TaskPage implements OnInit {
 
   }
 
+  cambiarFiltro(filtro: string) {
+    this.filtroActual = filtro;
+  }
+
+  get tasksFiltrados() {
+    if (this.filtroActual === 'pendientes') {
+      return this.tasks.filter(task => task.completada === false);
+    } else if (this.filtroActual === 'completadas') {
+      return this.tasks.filter(task => task.completada === true);
+    } else {
+    return this.tasks;
+    }
+  }
+
+  
   get tareasCompletadas(): number {
 
     return this.tasks.filter(

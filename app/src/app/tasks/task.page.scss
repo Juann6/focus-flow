@@ -166,3 +166,23 @@ h2 {
   color: #666;
 }
 
+#filtros button.activo{
+  background:#007BFF;
+  color: white;
+  border: 1px solid #007BFF;
+  font-weight: bold;
+}
+
+#filtros button {
+  background: white;
+  color: #007BFF;
+  border: 1px solid #007BFF;
+  padding: 10px 16px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#filtros button:hover {
+  transform: translateY(-2px);
+}

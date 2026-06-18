@@ -9,13 +9,13 @@
     </section>
 
     <section id="filtros">
-      <button (click)="filtroActual = 'todos'">Todos</button>
-      <button (click)="filtroActual = 'activos'">Activos</button>
-      <button (click)="filtroActual = 'completados'">Completados</button>
+      <button (click)= "cambiarFiltro('todos')" 
+      [ngClass]="{'activo': filtroActual === 'todos'}">Todos</button>
+      <button (click)="cambiarFiltro('activos')" 
+      [ngClass]="{'activo': filtroActual === 'activos'}">Activos</button>
+      <button (click)="cambiarFiltro('completados')" 
+      [ngClass]="{'activo': filtroActual === 'completados'}">Completados</button>
     </section>
-
-    
-
 
     <button (click)="mostrarFormulario = true">
       ➕ Agregar hábito</button>
