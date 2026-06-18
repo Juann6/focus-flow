@@ -21,7 +21,7 @@ export class HabitsPage implements OnInit {
   ngOnInit() {
     this.cargarHabitos();
   }
-  cambiarEstado(habit: Habit){
+  cambiarEstado(habit: Habit) {
     this.guardarHabitos();
   }
 
@@ -43,11 +43,27 @@ export class HabitsPage implements OnInit {
     this.mostrarFormulario = false;
   }
 
-  eliminarHabit(id:number) {
+  eliminarHabit(id: number) {
     this.habits = this.habits.filter(
-      habit => habit.id !==id
+      habit => habit.id !== id
     );
     this.guardarHabitos();
+  }
+
+  editarHabit(habit: Habit) {
+    this.habitEditando = habit;
+    this.editando = true;
+  }
+
+  guardarEdicion() {
+    this.guardarHabitos();
+    this.habitEditando = null;
+    this.editando = false;
+  }
+  
+  cancelarEdicion() {
+    this.habitEditando = null;
+    this.editando = false;
   }
 
   guardarHabitos() {
@@ -75,15 +91,17 @@ export class HabitsPage implements OnInit {
   }
 
   obtenerProgreso(): number {
-    if(this.habits.length=== 0){
+    if (this.habits.length === 0) {
       return 0;
     }
     return Math.round(
-      (this.obtenerHabitosCompletados() / this.habits.length) *100
+      (this.obtenerHabitosCompletados() / this.habits.length) * 100
     );
   }
 
   nuevoHabit = '';
   mostrarFormulario = false;
+  habitEditando: Habit | null = null;
+  editando = false;
 
 }

@@ -10,27 +10,54 @@ import { Task } from '../models/task.model';
   templateUrl: './task.page.html',
   styleUrls: ['./task.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, BottomNavigationComponent]
+  imports: [
+    IonContent,
+    IonHeader,
+    IonTitle,
+    IonToolbar,
+    CommonModule,
+    FormsModule,
+    BottomNavigationComponent
+  ]
 })
 export class TaskPage implements OnInit {
 
- tasks: Task[] = []
+  tasks: Task[] = [];
 
-  constructor() { }
+  taskEditando: Task | null = null;
+
+  editando = false;
+
+  prioridadesDisponibles = [
+    'Alta',
+    'Media',
+    'Baja',
+    'Urgente'
+  ];
+
+  nuevoNombre = '';
+  nuevaCategoria = '';
+  nuevaPrioridad = '';
+
+  mostrarFormulario = false;
+
+  constructor() {}
 
   ngOnInit() {
     this.cargarTasks();
   }
 
-  cambiarEstado(task:Task){
+  cambiarEstado(task: Task) {
     console.log(task);
     this.guardarTasks();
   }
 
-  agregarTask(){
+  agregarTask() {
+
     if (!this.nuevoNombre.trim()) {
       return;
     }
+
     const nuevaTask: Task = {
       id: Date.now(),
       name: this.nuevoNombre,
@@ -39,52 +66,89 @@ export class TaskPage implements OnInit {
       prioridad: this.nuevaPrioridad || 'Media',
       completada: false
     };
+
     this.tasks.push(nuevaTask);
+
     this.guardarTasks();
+
     this.nuevoNombre = '';
     this.nuevaCategoria = '';
     this.nuevaPrioridad = '';
+
     this.mostrarFormulario = false;
   }
 
-  eliminarTask(id:number){
+  eliminarTask(id: number) {
+
     this.tasks = this.tasks.filter(
-      task => task.id !==id 
+      task => task.id !== id
     );
+
     this.guardarTasks();
   }
 
+  editarTask(task: Task) {
+
+    this.taskEditando = task;
+
+    this.editando = true;
+  }
+
+  guardarEdicion() {
+
+    this.guardarTasks();
+
+    this.editando = false;
+
+    this.taskEditando = null;
+  }
+
+  cancelarEdicion() {
+
+    this.editando = false;
+
+    this.taskEditando = null;
+  }
+
   cargarTasks() {
-    const datos= localStorage.getItem('tasks');
+
+    const datos = localStorage.getItem('tasks');
 
     if (datos) {
+
       this.tasks = JSON.parse(datos);
 
       this.tasks.forEach(task => {
         task.date = new Date(task.date);
       });
+
     }
+
   }
 
   guardarTasks() {
-    localStorage.setItem('tasks', JSON.stringify(this.tasks));
+
+    localStorage.setItem(
+      'tasks',
+      JSON.stringify(this.tasks)
+    );
+
   }
 
   get tareasCompletadas(): number {
+
     return this.tasks.filter(
       task => task.completada
     ).length;
+
   }
-  
+
   get tareasPendientes(): number {
+
     return this.tasks.filter(
       task => !task.completada
     ).length;
-  }
 
-  nuevoNombre='';
-  nuevaCategoria='';
-  nuevaPrioridad='';
-  mostrarFormulario = false;
+  }
 
 }

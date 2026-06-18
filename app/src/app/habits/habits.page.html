@@ -42,9 +42,16 @@
         <button (click)="eliminarHabit(habit.id)">
           Eliminar
         </button>
+        <button (click)="editarHabit(habit)"> ✏️ Editar</button>
       </div>
 
     </section>
+
+    <div class="modal" *ngIf="editando && habitEditando">
+        <input type="text" [(ngModel)]="habitEditando.name">
+        <button (click)="guardarEdicion()">Guardar</button>
+        <button (click)="cancelarEdicion()">Cancelar</button>
+      </div>
 
   </main>
   <app-bottom-navigation></app-bottom-navigation>
