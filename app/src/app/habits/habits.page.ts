@@ -60,7 +60,7 @@ export class HabitsPage implements OnInit {
     this.habitEditando = null;
     this.editando = false;
   }
-  
+
   cancelarEdicion() {
     this.habitEditando = null;
     this.editando = false;
@@ -75,6 +75,21 @@ export class HabitsPage implements OnInit {
     if (datos) {
       this.habits = JSON.parse(datos);
     }
+  }
+
+  cambiarFiltro(filtro: string) {
+    this.filtroActual = filtro;
+  }
+
+  get habitsFiltrados() {
+    if (this.filtroActual === 'activos') {
+      return this.habits.filter(habit => habit.completado === false);
+    } else if (this.filtroActual === 'completados') {
+      return this.habits.filter(habit => habit.completado === true);
+    } else {
+      return this.habits;
+    }
+
   }
 
   obtenerHabitosCompletados(): number {
@@ -103,5 +118,6 @@ export class HabitsPage implements OnInit {
   mostrarFormulario = false;
   habitEditando: Habit | null = null;
   editando = false;
+  filtroActual = 'todos';
 
 }

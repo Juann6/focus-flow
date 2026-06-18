@@ -9,10 +9,13 @@
     </section>
 
     <section id="filtros">
-      <div id="todos"> Todos </div>
-      <div id="activos"> Activos </div>
-      <div id="completados"> Completados </div>
+      <button (click)="filtroActual = 'todos'">Todos</button>
+      <button (click)="filtroActual = 'activos'">Activos</button>
+      <button (click)="filtroActual = 'completados'">Completados</button>
     </section>
+
+    
+
 
     <button (click)="mostrarFormulario = true">
       ➕ Agregar hábito</button>
@@ -34,7 +37,7 @@
 
     <section id="habitos">
       <h2>Hábitos pendientes</h2>
-      <div class="habit" *ngFor="let habit of habits">      
+      <div class="habit" *ngFor="let habit of habitsFiltrados">      
         <span class="habit-name">
           {{ habit.name }}
         </span>
