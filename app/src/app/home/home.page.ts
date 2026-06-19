@@ -65,5 +65,12 @@ export class HomePage implements OnInit {
     );
   }
 
+  get habitsPendientes() {
+    return this.habits.filter(
+      habit => !habit.completado
+    );  
+  }
+
+
   constructor() {}
 }

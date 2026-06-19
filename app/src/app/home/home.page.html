@@ -1,7 +1,7 @@
 <ion-content [fullscreen]="true">
   <section id="welcome">
-    <h1>¡Hola, Nombre?</h1>
-    <h6>Aquí tienes un resumen de tu día</h6>
+    <h1>Bienvenido a Focus Flow!</h1>
+    <h6>Aquí tienes un resumen de tu productividad</h6>
   </section>
   <main>
     <section id="resumen">
@@ -25,11 +25,10 @@
 
     <section id="habitos">
       <h2>Hábitos de hoy</h2>
-      <div class="habit" *ngFor="let habit of habits">
+      <div class="habit" *ngFor="let habit of habitsPendientes | slice:0:3">
         <span class="habit-name">
           {{ habit.name }}
         </span>
-        <input type="checkbox" [checked]="habit.completado">
       </div>
     </section>
 
@@ -37,7 +36,7 @@
       <h2>Tareas pendientes</h2>
       <div 
         class="task" 
-        *ngFor="let task of tareasPendientesLista">
+        *ngFor="let task of tareasPendientesLista | slice:0:3">
         <span class="task-name">
           {{ task.name }}
         </span>
