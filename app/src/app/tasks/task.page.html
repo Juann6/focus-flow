@@ -31,30 +31,38 @@
       [ngClass]="{'activo': filtroActual === 'completadas'}">Completadas</button>
     </section>
 
+
     <button (click)="mostrarFormulario = true">
       ➕ Agregar tarea</button>
 
-    <!-- FORMULARIO CREAR TAREA -->
     <section id="crear-tarea" *ngIf="mostrarFormulario">
+      <h3>Nueva Tarea</h3>
 
-      <input type="text" placeholder="Nombre de la tarea" [(ngModel)]="nuevoNombre">
+      <div class="campo">
+        <label>Nombre</label>
+        <input type="text" placeholder="Nombre de la tarea" [(ngModel)]="nuevoNombre">
+      </div>
 
-      <input type="text" placeholder="Categoría" [(ngModel)]="nuevaCategoria">
+      <div class="campo">
+        <label>Categoría</label>
+        <input type="text" placeholder="Categoría" [(ngModel)]="nuevaCategoria">
+      </div>
 
-
-      <select [(ngModel)]="nuevaPrioridad">
-        <option *ngFor="let prioridad of prioridadesDisponibles" [value]="prioridad">
-          {{ prioridad }}
-        </option>
-      </select>
-
-      <button (click)="agregarTask()">
+      <div class="campo">
+        <label>Prioridad</label>
+        <select [(ngModel)]="nuevaPrioridad">
+          <option *ngFor="let prioridad of prioridadesDisponibles" [value]="prioridad">
+            {{ prioridad }}
+          </option>
+        </select>
+        <button (click)="agregarTask()">
         Agregar tarea
       </button>
 
       <button (click)="mostrarFormulario = false">
         Cancelar
       </button>
+      </div>
 
     </section>
 
@@ -81,13 +89,13 @@
               🏷 {{ task.categoria }}
             </span>
 
-            <button type="button" (click)="editarTask(task)">
-              Editar tarea
-            </button>
-
             <span class="prioridad">
               {{ task.prioridad }}
             </span>
+
+            <button type="button" (click)="editarTask(task)">
+              ✏️
+            </button>
 
             <button class="btn-eliminar" (click)="eliminarTask(task.id)">
               🗑

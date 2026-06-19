@@ -20,41 +20,63 @@
     <button (click)="mostrarFormulario = true">
       ➕ Agregar hábito</button>
 
-    <section *ngIf="mostrarFormulario">
-      <input
-        type="text"
-        placeholder="Nombre del hábito"
-        [(ngModel)]="nuevoHabit">
+    <section id="crear-habito" *ngIf="mostrarFormulario">
 
-      <button (click)="agregarHabit()">
-        Agregar hábito
-      </button>
+      <h3>Nuevo hábito</h3>
 
-      <button (click)="mostrarFormulario = false">
-        Cancelar
-      </button>
+      <div class="campo"> 
+        <label></label>
+        <input
+          type="text"
+          placeholder="Nombre del hábito"
+          [(ngModel)]="nuevoHabit">
+        </div>
+
+      <div class="acciones">
+        <button class="guardar"
+          (click)="agregarHabit()">
+          Agregar
+        </button>
+
+        <button class="cancelar"
+          (click)="mostrarFormulario = false">
+          Cancelar
+        </button>
+      </div>
     </section>
 
     <section id="habitos">
       <h2>Hábitos pendientes</h2>
-      <div class="habit" *ngFor="let habit of habitsFiltrados">      
-        <span class="habit-name">
-          {{ habit.name }}
-        </span>
-        <input type="checkbox" [(ngModel)]="habit.completado" (change)="cambiarEstado(habit)">
-        <button (click)="eliminarHabit(habit.id)">
-          Eliminar
-        </button>
-        <button (click)="editarHabit(habit)"> ✏️ Editar</button>
+      <div class="habit" *ngFor="let habit of habitsFiltrados">  
+        <div class="habit-info">
+          <input type="checkbox" [(ngModel)]="habit.completado" (change)="cambiarEstado(habit)">    
+          <span class="habit-name">
+            {{ habit.name }}
+          </span>
+        </div>
+        <div class="habit-actions">
+          <button (click)="eliminarHabit(habit.id)">
+            🗑
+          </button>
+          <button (click)="editarHabit(habit)">✏️</button>
+        </div>
       </div>
 
     </section>
 
     <div class="modal" *ngIf="editando && habitEditando">
-        <input type="text" [(ngModel)]="habitEditando.name">
-        <button (click)="guardarEdicion()">Guardar</button>
-        <button (click)="cancelarEdicion()">Cancelar</button>
+      <div class="modal-content">
+        <h3>Editar hábito</h3>
+        <div class="campo">
+          <input type="text" [(ngModel)]="habitEditando.name">
+        </div>
+
+        <div class="acciones">
+          <button (click)="guardarEdicion()">Guardar</button>
+          <button (click)="cancelarEdicion()">Cancelar</button>
+        </div>
       </div>
+    </div>
 
   </main>
   <app-bottom-navigation></app-bottom-navigation>
