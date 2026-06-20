@@ -11,25 +11,24 @@
 
       <div class="stat-card">
         <span class="icono">✅</span>
-        <span class="numero">18</span>
+        <span class="numero"> {{ habitosCompletados }}</span>
         <span class="texto">Hábitos completados</span>
       </div>
 
       <div class="stat-card">
         <span class="icono">📋</span>
-        <span class="numero">12</span>
-        <span class="texto">Tareas completadas</span>
+        <span class="numero"> {{ tareasCompletadas }} </span>
       </div>
 
       <div class="stat-card">
         <span class="icono">🔥</span>
-        <span class="numero">8</span>
+        <span class="numero"> {{ rachaTotal }}</span>
         <span class="texto">Días de racha</span>
       </div>
 
       <div class="stat-card">
         <span class="icono">📈</span>
-        <span class="numero">75%</span>
+        <span class="numero"> {{ productividad }}% </span>
         <span class="texto">Cumplimiento</span>
       </div>
 
@@ -41,32 +40,17 @@
 
     <section id="actividad">
 
-      <div class="dia">
-        <span>Lun</span>
-        <span>3</span>
-      </div>
+        <div
+            class="dia"
+            *ngFor="let dia of actividadSemanal">
 
-      <div class="dia">
-        <span>Mar</span>
-        <span>5</span>
-      </div>
+            <span>{{ dia.dia }}</span>
 
-      <div class="dia">
-        <span>Mié</span>
-        <span>2</span>
-      </div>
+             <span>{{ dia.cantidad }}</span>
 
-      <div class="dia">
-        <span>Jue</span>
-        <span>4</span>
-      </div>
+         </div>
 
-      <div class="dia">
-        <span>Vie</span>
-        <span>6</span>
-      </div>
-
-    </section>
+</section>
 
     <!-- PROGRESO -->
 
@@ -78,11 +62,15 @@
 
         <span class="titulo">Hábitos</span>
 
-        <div class="barra">
-          <div class="relleno-habitos"></div>
-        </div>
+      <div class="barra">
 
-        <span class="porcentaje">75%</span>
+         <div
+           class="relleno-habitos"
+           [style.width.%]="progresoHabitos">
+         </div>
+      </div>
+
+        <span class="porcentaje">{{ progresoHabitos }}% </span>
 
       </div>
 
@@ -90,17 +78,66 @@
 
         <span class="titulo">Tareas</span>
 
-        <div class="barra">
-          <div class="relleno-tareas"></div>
-        </div>
+      <div
+           class="relleno-tareas"
+           [style.width.%]="progresoTareas">
+      </div>
 
-        <span class="porcentaje">60%</span>
+        <span class="porcentaje">{{ progresoTareas }}% </span>
 
       </div>
 
     </section>
 
   </main>
+
+<h2>Historial de hábitos</h2>
+
+<section class="historial">
+
+  <div
+    class="historial-item"
+    *ngFor="let habit of habits">
+
+    <span>
+      {{ habit.name }}
+    </span>
+
+    <span>
+      {{ habit.fechaCreacion | date:'dd/MM/yyyy' }}
+    </span>
+
+  </div>
+
+</section>
+
+<h2>Historial de tareas</h2>
+
+<section class="historial">
+
+  <div
+    class="historial-item"
+    *ngFor="let task of tasks">
+
+    <span>
+      {{ task.name }}
+    </span>
+
+    <span>
+      {{ task.date | date:'dd/MM/yyyy' }}
+    </span>
+
+  </div>
+
+</section>
+
+<button
+  class="btn-recordatorio"
+  (click)="programarRecordatorio()">
+
+  🔔 Activar recordatorio
+
+</button>
 
   <app-bottom-navigation></app-bottom-navigation>
 
