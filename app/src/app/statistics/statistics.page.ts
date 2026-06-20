@@ -117,6 +117,12 @@ export class StatisticsPage implements OnInit {
           this.progresoTareas
         ) / 2
       );
+    
+     this.productividad = Math.max( 0, Math.min(100,
+    
+        Math.round( (this.progresoHabitos + this.progresoTareas) / 2)
+      )
+    );
 
     this.calcularActividadSemanal();
   }
