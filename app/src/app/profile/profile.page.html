@@ -5,11 +5,15 @@
 
   <main>
 
-    <!-- PERFIL USUARIO -->
-
     <section id="perfil">
 
-      <img src="assets/images/profile.jpg" alt="Foto de perfil">
+      <div class="avatar-container" (click)="fileInput.click()" style="cursor: pointer; position: relative;" aria-label="Cambiar foto de perfil">
+        <img [src]="perfil.foto || 'assets/images/profile.jpg'" alt="Foto de perfil" class="avatar-img">
+        <div class="avatar-overlay">
+          <span>📷</span>
+        </div>
+      </div>
+      <input type="file" #fileInput (change)="onFileSelected($event)" accept="image/*" style="display: none;">
 
       <div class="info">
         <span class="nombre">{{ perfil.nombre }}</span>
@@ -127,14 +131,16 @@
 
   <!-- Tema -->
   <div class="caja">
-  <span class="imagen">🌙</span>
-  <div class="contenido">
+    <span class="imagen">🌙</span>
+    <div class="contenido">
+      <span class="titulo">Tema de la aplicación</span>
+      <span class="valor">{{ tema }}</span>
+    </div>
+    <ion-select [(ngModel)]="tema" interface="popover" (ionChange)="onTemaChange()" aria-label="Seleccionar tema de la aplicación">
+      <ion-select-option value="Claro">Claro</ion-select-option>
+      <ion-select-option value="Oscuro">Oscuro</ion-select-option>
+    </ion-select>
   </div>
-  <ion-select [(ngModel)]="tema" interface="popover">
-    <ion-select-option value="Claro">Claro</ion-select-option>
-    <ion-select-option value="Oscuro">Oscuro</ion-select-option>
-  </ion-select>
-</div>
 
 </section>
 
@@ -147,7 +153,7 @@
 
     <section class="datos">
 
-      <div class="caja">
+      <div class="caja" (click)="cambiarContrasena()" style="cursor: pointer;">
         <span class="imagen">🔒</span>
 
         <div class="contenido">
@@ -157,7 +163,7 @@
         <span class="flecha">></span>
       </div>
 
-      <div class="caja">
+      <div class="caja" (click)="logout()" style="cursor: pointer;">
         <span class="imagen">🚪</span>
 
         <div class="contenido">

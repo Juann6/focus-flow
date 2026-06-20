@@ -1,0 +1,98 @@
+<ion-content [fullscreen]="true">
+  <div class="auth-wrapper">
+    <!-- Ambient Background Blobs -->
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+
+    <div class="auth-container">
+      <!-- App Header / Logo -->
+      <div class="auth-header">
+        <div class="logo-box">
+          <img src="assets/icon/logo.png" alt="Focus Flow Logo" class="logo-image">
+        </div>
+      </div>
+
+      <!-- Glassmorphic Card -->
+      <div class="auth-card">
+        <!-- Dynamic Card Title -->
+        <h2 class="card-title">
+          {{ mode === 'signin' ? 'Bienvenido' : mode === 'signup' ? 'Crear Cuenta' : 'Recuperar Cuenta' }}
+        </h2>
+        <p class="card-subtitle">
+          {{ mode === 'signin' ? 'Inicia sesión para continuar' : mode === 'signup' ? 'Regístrate y comienza gratis hoy'
+          : 'Te enviaremos un correo para restablecer tu contraseña' }}
+        </p>
+
+        <!-- Auth Form -->
+        <form (ngSubmit)="onSubmit()" #authForm="ngForm" class="auth-form">
+          <!-- Name Field (Only in SignUp) -->
+          <div class="input-group" *ngIf="mode === 'signup'">
+            <label for="name">Nombre Completo</label>
+            <div class="input-wrapper">
+              <span class="input-icon">👤</span>
+              <input type="text" id="name" name="name" [(ngModel)]="name" placeholder="Ingresa tu nombre" required
+                #nameInput="ngModel">
+            </div>
+          </div>
+
+          <!-- Email Field (All Modes) -->
+          <div class="input-group">
+            <label for="email">Correo Electrónico</label>
+            <div class="input-wrapper">
+              <span class="input-icon">✉️</span>
+              <input type="email" id="email" name="email" [(ngModel)]="email" placeholder="correo@ejemplo.com" required
+                #emailInput="ngModel">
+            </div>
+          </div>
+
+          <!-- Password Field (SignIn and SignUp) -->
+          <div class="input-group" *ngIf="mode !== 'forgot'">
+            <label for="password">Contraseña</label>
+            <div class="input-wrapper">
+              <span class="input-icon">🔒</span>
+              <input type="password" id="password" name="password" [(ngModel)]="password" placeholder="••••••••"
+                required #passwordInput="ngModel">
+            </div>
+          </div>
+
+          <!-- Confirm Password Field (Only in SignUp) -->
+          <div class="input-group" *ngIf="mode === 'signup'">
+            <label for="confirmPassword">Confirmar Contraseña</label>
+            <div class="input-wrapper">
+              <span class="input-icon">🛡️</span>
+              <input type="password" id="confirmPassword" name="confirmPassword" [(ngModel)]="confirmPassword"
+                placeholder="••••••••" required #confirmPasswordInput="ngModel">
+            </div>
+          </div>
+
+          <!-- Forgot Password Link (Only in SignIn) -->
+          <div class="forgot-link-container" *ngIf="mode === 'signin'">
+            <a (click)="toggleMode('forgot')" class="forgot-link">¿Olvidaste tu contraseña?</a>
+          </div>
+
+          <!-- Action Button -->
+          <button type="submit" class="btn-submit" [disabled]="loading">
+            <span *ngIf="!loading">
+              {{ mode === 'signin' ? 'Iniciar Sesión' : mode === 'signup' ? 'Registrarse' : 'Enviar Correo' }}
+            </span>
+            <ion-spinner *ngIf="loading" name="crescent" color="light"></ion-spinner>
+          </button>
+        </form>
+
+        <!-- Secondary Actions Links -->
+        <div class="auth-footer-actions">
+          <p *ngIf="mode === 'signin'">
+            ¿No tienes cuenta? <a (click)="toggleMode('signup')">Regístrate</a>
+          </p>
+          <p *ngIf="mode === 'signup'">
+            ¿Ya tienes una cuenta? <a (click)="toggleMode('signin')">Inicia sesión</a>
+          </p>
+          <p *ngIf="mode === 'forgot'">
+            <a (click)="toggleMode('signin')">← Volver al inicio de sesión</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>

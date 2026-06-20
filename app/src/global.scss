@@ -33,10 +33,116 @@
  */
 
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
-/* @import "@ionic/angular/css/palettes/dark.class.css"; */
-@import '@ionic/angular/css/palettes/dark.system.css';
+@import "@ionic/angular/css/palettes/dark.class.css";
+/* @import '@ionic/angular/css/palettes/dark.system.css'; */
 
 
 body {
     font-family: 'Exo 2', sans-serif;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* ============================================================================
+   Sobreescrituras para Tema Oscuro (Accesibilidad AAA)
+   ============================================================================ */
+.dark {
+  --ion-background-color: #0e0d14 !important;
+  --ion-text-color: #ffffff !important;
+
+  body {
+    background-color: #0e0d14 !important;
+    color: #ffffff !important;
+  }
+
+  ion-content {
+    --background: #0e0d14 !important;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    color: #ffffff !important;
+  }
+
+  /* Tarjetas y Contenedores */
+  .stat-card,
+  .habit,
+  .task,
+  #perfil,
+  .caja,
+  form,
+  .modal-content,
+  #crear-habito,
+  .bottom-nav {
+    background: #171622 !important;
+    color: #ffffff !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25) !important;
+    border-color: #262536 !important;
+  }
+
+  /* Nombre y texto de alta relevancia */
+  .nombre,
+  .valor,
+  .habit-name,
+  .task-name,
+  .titulo-habit {
+    color: #ffffff !important;
+  }
+
+  /* Texto secundario de accesibilidad (Gris claro de alto contraste) */
+  .email,
+  .label,
+  .task-category,
+  .titulo,
+  .subtitle,
+  .card-subtitle {
+    color: #a3a1b8 !important;
+  }
+
+  .flecha {
+    color: #64627d !important;
+  }
+
+  /* Entradas de Formulario (Inputs) */
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="number"],
+  input[type="date"] {
+    background: rgba(0, 0, 0, 0.3) !important;
+    color: #ffffff !important;
+    border-color: #2c2b3e !important;
+
+    &:focus {
+      border-color: #007BFF !important;
+      box-shadow: 0 0 8px rgba(0, 123, 255, 0.3) !important;
+    }
+  }
+
+  /* Filtros y Controles de Navegación */
+  #todos,
+  #activos,
+  #completados,
+  ion-select,
+  .cancelar {
+    background: #1f1d2d !important;
+    color: #ffffff !important;
+    border: 1px solid #333148 !important;
+  }
+
+  #filtros button:not(.activo) {
+    background: #1f1d2d !important;
+    color: #00D4FF !important;
+    border: 1px solid #333148 !important;
+  }
+
+  /* Menú desplegable Selects */
+  ion-select::part(text) {
+    color: #ffffff !important;
+  }
+
+  /* Fondo de botones secundarios en modales */
+  .cancelar {
+    background: #252335 !important;
+    color: #ff5252 !important;
+    border-color: #3b3952 !important;
+  }
 }

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { ThemeService } from './services/theme.service';
 
 
 @Component({
@@ -8,4 +9,6 @@ import { RouterOutlet } from '@angular/router';
   standalone: true,
   imports: [RouterOutlet]
 })
-export class AppComponent {}
+export class AppComponent {
+  constructor(private themeService: ThemeService) {}
+}

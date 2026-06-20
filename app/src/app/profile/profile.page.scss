@@ -37,13 +37,72 @@ h2 {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
-#perfil img {
+.avatar-container {
+  position: relative;
   width: 90px;
   height: 90px;
-
   border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+  
+  &:hover {
+    transform: scale(1.05);
+    .avatar-overlay {
+      opacity: 1;
+    }
+  }
+}
 
+.avatar-img {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
+}
+
+.avatar-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  
+  span {
+    font-size: 20px;
+    color: white;
+  }
+}
+
+/* Botón General de Guardar Preferencias */
+main > button {
+  width: 100%;
+  height: 50px;
+  background: linear-gradient(135deg, #007BFF, #00D4FF);
+  color: white;
+  border: none;
+  border-radius: 14px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.15);
+  transition: all 0.3s ease;
+  margin-bottom: 24px;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(0, 123, 255, 0.25);
+  }
+  
+  &:active {
+    transform: translateY(0);
+  }
 }
 
 .info {
