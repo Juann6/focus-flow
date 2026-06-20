@@ -1,25 +1,34 @@
 <ion-content [fullscreen]="true">
   <section id="welcome">
-    <h1>Bienvenido a Focus Flow!</h1>
-    <h6>Aquí tienes un resumen de tu productividad</h6>
+    <div class="welcome-card">
+      <h1>Bienvenido a Focus Flow!</h1>
+      <p>Aquí tienes un resumen de tu productividad</p>
+    </div>
   </section>
   <main>
     <section id="resumen">
-      <div id="indicadores">
-        <p>
-          Hábitos: {{ totalHabits }}
-        </p>
-        <p>
-          Hábitos completados:
-          {{ habitsCompletados }}
-        </p>
-        <p>
-          Tareas: {{ totalTareas }}
-        </p>
-        <p>
-          Tareas pendientes:
-          {{ tareasPendientes }}
-        </p>
+      <div class="stats-grid">
+
+        <div class="stat-card">
+          <span class="number">{{ totalHabits }}</span>
+          <span class="label">Hábitos</span>
+        </div>
+
+        <div class="stat-card">
+          <span class="number">{{ habitsCompletados }}</span>
+          <span class="label">Completados</span>
+        </div>
+
+        <div class="stat-card">
+          <span class="number">{{ totalTareas }}</span>
+          <span class="label">Tareas</span>
+        </div>
+
+        <div class="stat-card">
+          <span class="number">{{ tareasPendientes }}</span>
+          <span class="label">Pendientes</span>
+        </div>
+
       </div>
     </section>
 

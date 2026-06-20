@@ -2,7 +2,13 @@ ion-content {
   --padding-start: 20px;
   --padding-end: 20px;
   --padding-top: 20px;
+  background: linear-gradient(
+  135deg,
+  #22E3A6,
+  #00D4FF,);
 }
+
+
 
 h1 {
   font-size: 28px;
@@ -17,22 +23,94 @@ h2 {
   margin-bottom: 20px;
 }
 
-#resumen {
-  background: white;
-  border-radius: 20px;
-  padding: 20px;
-  margin-bottom: 20px;
-
-  display: flex;
-  flex-direction: row;
-  gap: 12px;
-
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+.page-header p {
+  color: #6b7280;
+  margin-top: 6px;
 }
 
-#resumen div {
-  font-size: 16px;
-  font-weight: 500;
+.btn-add {
+  position: absolute;
+  top: 40px;
+  right: 20px;
+
+  width: 55px;
+  height: 55px;
+
+  border-radius: 50%;
+  border: none;
+
+  background: linear-gradient(
+    135deg,
+    #007BFF,
+    #00D4FF
+  );
+
+  color: white;
+  font-size: 32px;
+  font-weight: 300;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  box-shadow: 0 8px 20px rgba(0,123,255,0.25);
+}
+
+#resumen {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.stat-card {
+  background: white;
+  border-radius: 20px;
+  padding: 18px;
+
+  display: flex;
+  flex-direction: column;
+
+  box-shadow: 0 5px 15px rgba(0,0,0,0.06);
+}
+
+.number {
+  font-size: 28px;
+  font-weight: 700;
+  color: #007BFF;
+}
+
+.label {
+  color: #6b7280;
+  margin-top: 5px;
+}
+
+.hero-card {
+  background: linear-gradient(
+    135deg,
+    #007BFF,
+    #00D4FF
+  );
+
+  padding: 24px;
+  border-radius: 20px;
+
+  color: white;
+
+  margin-bottom: 24px;
+
+  box-shadow: 0 10px 25px rgba(0,123,255,0.25);
+}
+
+.hero-card h2 {
+  color: white;
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.hero-card p {
+  color: rgba(255,255,255,0.9);
 }
 
 #filtros {

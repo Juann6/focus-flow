@@ -1,11 +1,58 @@
 <ion-content>
-  <h1>Hábitos</h1>
-  <h2>Crea y gestiona tus hábitos</h2>
+  <div class="page-header">
+    <h1>Hábitos</h1>
+    <h2>Crea y gestiona tus hábitos</h2>
+    <button class="btn-add" (click)="mostrarFormulario = true">
+      +
+    </button>
+  </div>
   <main>
+
+    <div class="hero-card">
+      <div>
+        <h2>Resumen de tus hábitos</h2>
+        <p>Aquí tienes un resumen de tus hábitos</p>
+      </div>
+    </div>
+
     <section id="resumen">
-      <div id="progreso"> ✓ {{ obtenerHabitosCompletados() }} Completados hoy </div>
-      <div id="mensaje"> 🔥 {{ obtenerRachaTotal() }} Racha total</div>
-      <div id="indicadores"> % {{ obtenerProgreso() }}Progreso semanal </div>
+
+      <div class="stat-card">
+        <span class="number">
+          {{ habitsFiltrados.length }}
+        </span>
+        <span class="label">
+          Hábitos
+        </span>
+      </div>
+
+      <div class="stat-card">
+        <span class="number">
+          {{ obtenerHabitosCompletados() }}
+        </span>
+        <span class="label">
+          Completados
+        </span>
+      </div>
+
+      <div class="stat-card">
+        <span class="number">
+          {{ obtenerRachaTotal() }}
+        </span>
+        <span class="label">
+          Racha
+        </span>
+      </div>
+
+      <div class="stat-card">
+        <span class="number">
+          {{ obtenerProgreso() }}%
+        </span>
+        <span class="label">
+          Progreso
+        </span>
+      </div>
+
     </section>
 
     <section id="filtros">
@@ -16,9 +63,6 @@
       <button (click)="cambiarFiltro('completados')" 
       [ngClass]="{'activo': filtroActual === 'completados'}">Completados</button>
     </section>
-
-    <button (click)="mostrarFormulario = true">
-      ➕ Agregar hábito</button>
 
     <section id="crear-habito" *ngIf="mostrarFormulario">
 

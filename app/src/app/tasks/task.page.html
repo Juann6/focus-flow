@@ -1,22 +1,62 @@
 <ion-content>
+  <div class="header-container">
 
-  <h1>Tarea</h1>
-  <h2>Crea y gestiona tus tareas</h2>
+    <div class="page-header">
+      <h1>Tareas</h1>
+      <p>Crea y gestiona tus tareas</p>
+    </div>
+
+    <button class="btn-add" (click)="mostrarFormulario = true">
+      +
+    </button>
+
+  </div>
 
   <main>
 
+    <div class="hero-card">
+      <div>
+        <h2>Resumen de tus hábitos</h2>
+        <p>Aquí tienes un resumen de tus hábitos</p>
+      </div>
+    </div>
+
     <section id="resumen">
 
-      <div id="tareas">
-        ✓ {{ tareasCompletadas }} Completadas
+      <div class="stat-card">
+        <span class="number">
+          {{ tasks.length }}
+        </span>
+        <span class="label">
+          Tareas
+        </span>
       </div>
 
-      <div id="pendientes">
-        {{ tareasPendientes }} Pendientes
+      <div class="stat-card">
+        <span class="number">
+          {{ tareasPendientes }}
+        </span>
+        <span class="label">
+          Pendientes
+        </span>
       </div>
 
-      <div id="completadas">
-        {{ tareasCompletadas }} Completadas
+      <div class="stat-card">
+        <span class="number">
+          {{ tareasCompletadas }}
+        </span>
+        <span class="label">
+          Completadas
+        </span>
+      </div>
+
+      <div class="stat-card">
+        <span class="number">
+          {{ tasks.length > 0 ? ((tareasCompletadas / tasks.length) * 100).toFixed(0) : 0 }}%
+        </span>
+        <span class="label">
+          Progreso
+        </span>
       </div>
 
     </section>
@@ -30,10 +70,6 @@
       <button id="completadas" (click)="cambiarFiltro('completadas')"
       [ngClass]="{'activo': filtroActual === 'completadas'}">Completadas</button>
     </section>
-
-
-    <button (click)="mostrarFormulario = true">
-      ➕ Agregar tarea</button>
 
     <section id="crear-tarea" *ngIf="mostrarFormulario">
       <h3>Nueva Tarea</h3>
