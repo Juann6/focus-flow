@@ -1,143 +1,158 @@
 <ion-content>
 
-  <h1>Estadísticas</h1>
-  <h2>Tu progreso en hábitos y tareas</h2>
+  <div class="page-header">
+    <h1>Estadísticas</h1>
+    <p>Analiza tu progreso y rendimiento</p>
+  </div>
 
-  <main>
+  <div class="hero-card">
+    <h2>Resumen de productividad</h2>
+    <p>Visualiza el avance de tus hábitos y tareas.</p>
+  </div>
 
-    <!-- RESUMEN -->
+  <section id="resumen-general">
 
-    <section id="resumen-general">
+    <div class="stat-card">
+      <span class="icono">✅</span>
+      <span class="numero">{{ habitosCompletados }}</span>
+      <span class="texto">Hábitos completados</span>
+    </div>
 
-      <div class="stat-card">
-        <span class="icono">✅</span>
-        <span class="numero"> {{ habitosCompletados }}</span>
-        <span class="texto">Hábitos completados</span>
-      </div>
+    <div class="stat-card">
+      <span class="icono">📋</span>
+      <span class="numero">{{ tareasCompletadas }}</span>
+      <span class="texto">Tareas completadas</span>
+    </div>
 
-      <div class="stat-card">
-        <span class="icono">📋</span>
-        <span class="numero"> {{ tareasCompletadas }} </span>
-      </div>
+    <div class="stat-card">
+      <span class="icono">🔥</span>
+      <span class="numero">{{ rachaTotal }}</span>
+      <span class="texto">Racha total</span>
+    </div>
 
-      <div class="stat-card">
-        <span class="icono">🔥</span>
-        <span class="numero"> {{ rachaTotal }}</span>
-        <span class="texto">Días de racha</span>
-      </div>
+    <div class="stat-card">
+      <span class="icono">📈</span>
+      <span class="numero">{{ productividad }}%</span>
+      <span class="texto">Productividad</span>
+    </div>
 
-      <div class="stat-card">
-        <span class="icono">📈</span>
-        <span class="numero"> {{ productividad }}% </span>
-        <span class="texto">Cumplimiento</span>
-      </div>
+  </section>
 
-    </section>
+  <h3 class="section-title">
+    Actividad semanal
+  </h3>
 
-    <!-- ACTIVIDAD SEMANAL -->
+  <section id="actividad">
 
-    <h2>Actividad semanal</h2>
+    <div
+      class="dia"
+      *ngFor="let dia of actividadSemanal">
 
-    <section id="actividad">
+      <span>{{ dia.dia }}</span>
 
-        <div
-            class="dia"
-            *ngFor="let dia of actividadSemanal">
+      <strong>{{ dia.cantidad }}</strong>
 
-            <span>{{ dia.dia }}</span>
+    </div>
 
-             <span>{{ dia.cantidad }}</span>
+  </section>
 
-         </div>
+  <h3 class="section-title">
+    Progreso general
+  </h3>
 
-</section>
+  <section id="progreso">
 
-    <!-- PROGRESO -->
+    <div class="progreso-card">
 
-    <h2>Progreso general</h2>
-
-    <section id="progreso">
-
-      <div class="progreso-card">
-
-        <span class="titulo">Hábitos</span>
+      <span class="titulo">
+        Hábitos
+      </span>
 
       <div class="barra">
-
-         <div
-           class="relleno-habitos"
-           [style.width.%]="progresoHabitos">
-         </div>
+        <div
+          class="relleno-habitos"
+          [style.width.%]="progresoHabitos">
+        </div>
       </div>
 
-        <span class="porcentaje">{{ progresoHabitos }}% </span>
+      <span class="porcentaje">
+        {{ progresoHabitos }}%
+      </span>
 
+    </div>
+
+    <div class="progreso-card">
+
+      <span class="titulo">
+        Tareas
+      </span>
+
+      <div class="barra">
+        <div
+          class="relleno-tareas"
+          [style.width.%]="progresoTareas">
+        </div>
       </div>
 
-      <div class="progreso-card">
+      <span class="porcentaje">
+        {{ progresoTareas }}%
+      </span>
 
-        <span class="titulo">Tareas</span>
+    </div>
 
-      <div
-           class="relleno-tareas"
-           [style.width.%]="progresoTareas">
-      </div>
+  </section>
 
-        <span class="porcentaje">{{ progresoTareas }}% </span>
+  <h3 class="section-title">
+    Últimos hábitos
+  </h3>
 
-      </div>
+  <section class="historial">
 
-    </section>
+    <div
+      class="historial-item"
+      *ngFor="let habit of habits | slice:0:5">
 
-  </main>
+      <span>
+        {{ habit.name }}
+      </span>
 
-<h2>Historial de hábitos</h2>
+      <span>
+        {{ habit.fechaCreacion | date:'dd/MM/yyyy' }}
+      </span>
 
-<section class="historial">
+    </div>
 
-  <div
-    class="historial-item"
-    *ngFor="let habit of habits">
+  </section>
 
-    <span>
-      {{ habit.name }}
-    </span>
+  <h3 class="section-title">
+    Últimas tareas
+  </h3>
 
-    <span>
-      {{ habit.fechaCreacion | date:'dd/MM/yyyy' }}
-    </span>
+  <section class="historial">
 
-  </div>
+    <div
+      class="historial-item"
+      *ngFor="let task of tasks | slice:0:5">
 
-</section>
+      <span>
+        {{ task.name }}
+      </span>
 
-<h2>Historial de tareas</h2>
+      <span>
+        {{ task.date | date:'dd/MM/yyyy' }}
+      </span>
 
-<section class="historial">
+    </div>
 
-  <div
-    class="historial-item"
-    *ngFor="let task of tasks">
+  </section>
 
-    <span>
-      {{ task.name }}
-    </span>
+  <button
+    class="btn-recordatorio"
+    (click)="programarRecordatorio()">
 
-    <span>
-      {{ task.date | date:'dd/MM/yyyy' }}
-    </span>
+    🔔 Activar recordatorio
 
-  </div>
-
-</section>
-
-<button
-  class="btn-recordatorio"
-  (click)="programarRecordatorio()">
-
-  🔔 Activar recordatorio
-
-</button>
+  </button>
 
   <app-bottom-navigation></app-bottom-navigation>
 

@@ -191,10 +191,12 @@ h2 {
 }
 
 .habit-actions button {
-  border: none;
-  background: transparent;
-  cursor: pointer;
-  text-align: left;
+  width: 35px;
+  height: 35px;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* CHECKBOX */

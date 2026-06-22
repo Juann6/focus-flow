@@ -91,13 +91,21 @@
             {{ prioridad }}
           </option>
         </select>
-        <button (click)="agregarTask()">
-        Agregar tarea
-      </button>
+      </div>
+      <div class="acciones">
 
-      <button (click)="mostrarFormulario = false">
-        Cancelar
-      </button>
+        <button
+          class="guardar"
+          (click)="agregarTask()">
+          Agregar tarea
+        </button>
+
+        <button
+          class="cancelar"
+          (click)="mostrarFormulario = false">
+          Cancelar
+        </button>
+
       </div>
 
     </section>
@@ -129,14 +137,29 @@
               {{ task.prioridad }}
             </span>
 
-            <button type="button" (click)="editarTask(task)">
-              ✏️
-            </button>
+            <div class="task-actions">
 
-            <button class="btn-eliminar" (click)="eliminarTask(task.id)">
-              🗑
-            </button>
+              <button
+                class="btn-edit"
+                (click)="editarTask(task)">
 
+                <ion-icon
+                  name="create-outline">
+                </ion-icon>
+
+              </button>
+
+              <button
+                class="btn-delete"
+                (click)="eliminarTask(task.id)">
+
+                <ion-icon
+                  name="trash-outline">
+                </ion-icon>
+
+              </button>
+
+            </div>
           </div>
         </div>
       </div>

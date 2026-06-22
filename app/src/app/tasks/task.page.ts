@@ -4,6 +4,9 @@ import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
 import { BottomNavigationComponent } from '../shared/bottom-navigation/bottom-navigation';
 import { Task } from '../models/task.model';
+import { createOutline, trashOutline } from 'ionicons/icons';
+import { IonIcon } from '@ionic/angular/standalone';
+import { addIcons } from 'ionicons';
 
 @Component({
   selector: 'app-task',
@@ -17,7 +20,8 @@ import { Task } from '../models/task.model';
     IonToolbar,
     CommonModule,
     FormsModule,
-    BottomNavigationComponent
+    BottomNavigationComponent,
+    IonIcon
   ]
 })
 export class TaskPage implements OnInit {
@@ -43,7 +47,14 @@ export class TaskPage implements OnInit {
 
   filtroActual = 'todos';
 
-  constructor() {}
+  constructor() {
+
+  addIcons({
+    createOutline,
+    trashOutline
+  });
+
+}
 
   ngOnInit() {
     this.cargarTasks();

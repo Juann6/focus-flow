@@ -364,3 +364,34 @@ h2 {
   border-radius: 10px;
   padding: 10px;
 }
+
+.task-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn-edit {
+
+  width: 36px;
+  height: 36px;
+
+  border: none;
+
+  border-radius: 10px;
+
+  background: #E6F6FF;
+
+  color: #007BFF;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-edit ion-icon,
+.btn-delete ion-icon {
+
+  font-size: 18px;
+
+}

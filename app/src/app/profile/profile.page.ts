@@ -54,7 +54,6 @@ export class ProfilePage implements OnInit {
       const parsedData = JSON.parse(data);
       this.perfil.fechaNacimiento = parsedData.fechaNacimiento || '';
       this.perfil.edad = parsedData.edad || 0;
-      this.perfil.ciclo = parsedData.ciclo || 28;
       // Si Firebase no tiene nombre cargado, conservar el local
       if (!this.perfil.nombre && parsedData.nombre) {
         this.perfil.nombre = parsedData.nombre;
@@ -170,9 +169,6 @@ export class ProfilePage implements OnInit {
     await toast.present();
   }
 
-  /**
-   * Cerrar sesión
-   */
   async logout() {
     try {
       await this.authService.logout();
@@ -225,3 +221,4 @@ export class ProfilePage implements OnInit {
     }
   }
 }
+

@@ -46,11 +46,6 @@
       <input type="date" [(ngModel)]="perfil.fechaNacimiento">
     </div>
 
-    <div class="form-group">
-      <label>Ciclo</label>
-      <input type="number" [(ngModel)]="perfil.ciclo">
-    </div>
-
     <div class="botones"> 
       <button class="guardar" (click)="guardarPerfil()">Guardar</button>
       <button class="cancelar" (click)="editando = false">Cancelar</button>
@@ -71,7 +66,6 @@
       <span class="titulo">Correo electrónico</span>
       <span class="valor">{{ perfil.email }}</span>
     </div>
-    <span class="flecha">></span>
   </div>
 
   <div class="caja">
@@ -80,7 +74,6 @@
       <span class="titulo">Nombre completo</span>
       <span class="valor">{{ perfil.nombre }}</span>
     </div>
-    <span class="flecha">></span>
   </div>
 
   <div class="caja">
@@ -89,7 +82,6 @@
       <span class="titulo">Edad</span>
       <span class="valor">{{ perfil.edad }} años</span>
     </div>
-    <span class="flecha">></span>
   </div>
 
   <div class="caja">
@@ -98,16 +90,6 @@
       <span class="titulo">Fecha de nacimiento</span>
       <span class="valor">{{ perfil.fechaNacimiento | date:'longDate' }}</span>
     </div>
-    <span class="flecha">></span>
-  </div>
-
-  <div class="caja">
-    <span class="imagen">🔄</span>
-    <div class="contenido">
-      <span class="titulo">Ciclo</span>
-      <span class="valor">{{ perfil.ciclo }}</span>
-    </div>
-    <span class="flecha">></span>
   </div>
 
 </section>
@@ -146,7 +128,6 @@
 
 <!-- Btn para guardar cambios -->
 <button (click)="guardarPreferencias()">Guardar preferencias</button>
-
     <!-- CUENTA -->
 
     <h2>Cuenta</h2>
