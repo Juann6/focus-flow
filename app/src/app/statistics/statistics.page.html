@@ -100,6 +100,21 @@
 
     </section>
 
+    <!-- Historial -->
+    <h2>Historial reciente</h2>
+
+<section id="historial">
+
+  <div class="actividad" *ngFor="let item of historial">
+
+    <span>{{ item.icono }} {{ item.actividad }}</span>
+
+    <span>{{ item.fecha }}</span>
+
+  </div>
+
+</section>
+
   </main>
 
   <app-bottom-navigation></app-bottom-navigation>
