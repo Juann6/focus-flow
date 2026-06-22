@@ -13,6 +13,23 @@ import { BottomNavigationComponent } from '../shared/bottom-navigation/bottom-na
 })
 export class StatisticsPage implements OnInit {
 
+historial = [
+    {
+      actividad: 'Leer 30 minutos',
+      fecha: 'Hoy',
+      icono: '✅'
+    },
+    {
+      actividad: 'Completar informe',
+      fecha: 'Ayer',
+      icono: '📋'
+    },
+    {
+      actividad: 'Hacer ejercicio',
+      fecha: 'Hace 2 días',
+      icono: '🏃'
+    }
+  ];
   constructor() { }
 
   ngOnInit() {
