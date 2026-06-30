@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonIcon } from '@ionic/angular/standalone';
@@ -10,7 +10,11 @@ import {
   checkmarkCircleOutline,
   listOutline,
   clipboardOutline,
-  trendingUpOutline
+  trendingUpOutline,
+  checkmarkDoneOutline,
+  flameOutline,
+  statsChartOutline,
+  fitnessOutline,
 } from 'ionicons/icons';
 
 @Component({
@@ -18,9 +22,12 @@ import {
   templateUrl: './habits.page.html',
   styleUrls: ['./habits.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, BottomNavigationComponent]
+  imports: [IonContent, IonIcon, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, BottomNavigationComponent]
 })
 export class HabitsPage implements OnInit {
+  
+  @ViewChild('formulario')
+  formulario!: ElementRef;
 
   habits: Habit[] = []
 
@@ -30,7 +37,11 @@ export class HabitsPage implements OnInit {
     checkmarkCircleOutline,
     listOutline,
     clipboardOutline,
-    trendingUpOutline
+    trendingUpOutline,
+    checkmarkDoneOutline,
+    flameOutline,
+    statsChartOutline,
+    fitnessOutline
   });
 
 }
@@ -97,6 +108,21 @@ export class HabitsPage implements OnInit {
   cambiarFiltro(filtro: string) {
     this.filtroActual = filtro;
   }
+
+  mostrarFormularioHabit() {
+
+    this.mostrarFormulario = true;
+
+    setTimeout(() => {
+
+      this.formulario.nativeElement.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+    });
+
+  }, 100);
+
+}
 
   get habitsFiltrados() {
     if (this.filtroActual === 'activos') {

@@ -6,7 +6,7 @@
       <p>Crea y gestiona tus tareas</p>
     </div>
 
-    <button class="btn-add" (click)="mostrarFormulario = true">
+    <button class="btn-add" (click)="mostrarFormularioTask()">
       +
     </button>
 
@@ -30,6 +30,10 @@
         <span class="label">
           Tareas
         </span>
+        <ion-icon
+            name="clipboard-outline"
+            class="start-icon">
+          </ion-icon>
       </div>
 
       <div class="stat-card">
@@ -39,6 +43,10 @@
         <span class="label">
           Pendientes
         </span>
+        <ion-icon
+            name="hourglass-outline"
+            class="start-icon">
+          </ion-icon>
       </div>
 
       <div class="stat-card">
@@ -48,6 +56,10 @@
         <span class="label">
           Completadas
         </span>
+        <ion-icon
+            name="checkmark-done-outline"
+            class="start-icon">
+          </ion-icon>
       </div>
 
       <div class="stat-card">
@@ -57,6 +69,10 @@
         <span class="label">
           Progreso
         </span>
+        <ion-icon
+            name="stats-chart-outline"
+            class="start-icon">
+          </ion-icon>
       </div>
 
     </section>
@@ -71,7 +87,7 @@
       [ngClass]="{'activo': filtroActual === 'completadas'}">Completadas</button>
     </section>
 
-    <section id="crear-tarea" *ngIf="mostrarFormulario">
+    <section id="crear-tarea" #formulario *ngIf="mostrarFormulario">
       <h3>Nueva Tarea</h3>
 
       <div class="campo">

@@ -1,12 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
 import { BottomNavigationComponent } from '../shared/bottom-navigation/bottom-navigation';
 import { Task } from '../models/task.model';
-import { createOutline, trashOutline } from 'ionicons/icons';
 import { IonIcon } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
+import { 
+  createOutline, 
+  trashOutline,
+  clipboardOutline,
+  hourglassOutline,
+  checkmarkDoneOutline,
+  statsChartOutline } from 'ionicons/icons';
 
 @Component({
   selector: 'app-task',
@@ -26,12 +32,12 @@ import { addIcons } from 'ionicons';
 })
 export class TaskPage implements OnInit {
 
+  @ViewChild('formulario')
+  formulario!: ElementRef; 
+
   tasks: Task[] = [];
-
   taskEditando: Task | null = null;
-
   editando = false;
-
   prioridadesDisponibles = [
     'Alta',
     'Media',
@@ -42,16 +48,18 @@ export class TaskPage implements OnInit {
   nuevoNombre = '';
   nuevaCategoria = '';
   nuevaPrioridad = '';
-
   mostrarFormulario = false;
-
   filtroActual = 'todos';
 
   constructor() {
 
   addIcons({
     createOutline,
-    trashOutline
+    trashOutline,
+    clipboardOutline,
+    hourglassOutline,
+    checkmarkDoneOutline,
+    statsChartOutline
   });
 
 }
@@ -151,6 +159,21 @@ export class TaskPage implements OnInit {
   cambiarFiltro(filtro: string) {
     this.filtroActual = filtro;
   }
+
+  mostrarFormularioTask() {
+
+  this.mostrarFormulario = true;
+
+  setTimeout(() => {
+
+    this.formulario.nativeElement.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start'
+    });
+
+  }, 100);
+
+}
 
   get tasksFiltrados() {
     if (this.filtroActual === 'pendientes') {

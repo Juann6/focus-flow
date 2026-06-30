@@ -6,13 +6,23 @@ import { OnInit } from '@angular/core';
 import { Habit } from '../models/habit.model';
 import { Task } from '../models/task.model';
 import { CommonModule } from '@angular/common';
+import { addIcons } from 'ionicons';
+
+import { 
+  fitnessOutline,
+  trophyOutline,
+  clipboardOutline,
+  hourglassOutline,
+} from 'ionicons/icons'
+import { IonIcon } from '@ionic/angular/standalone';
 
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
-  imports: [IonHeader, IonToolbar, IonTitle, IonContent, IonFooter, RouterLink, BottomNavigationComponent, CommonModule],
+  standalone: true,
+  imports: [IonHeader, IonIcon, IonToolbar, IonTitle, IonContent, IonFooter, RouterLink, BottomNavigationComponent, CommonModule],
 })
 export class HomePage implements OnInit {
 
@@ -72,5 +82,12 @@ export class HomePage implements OnInit {
   }
 
 
-  constructor() {}
+  constructor() {
+    addIcons({
+      fitnessOutline,
+      trophyOutline,
+      clipboardOutline,
+      hourglassOutline
+    })
+  }
 }

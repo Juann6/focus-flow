@@ -2,7 +2,7 @@
   <div class="page-header">
     <h1>Hábitos</h1>
     <h2>Crea y gestiona tus hábitos</h2>
-    <button class="btn-add" (click)="mostrarFormulario = true">
+    <button class="btn-add" (click)="mostrarFormularioHabit()">
       +
     </button>
   </div>
@@ -24,6 +24,10 @@
         <span class="label">
           Hábitos
         </span>
+        <ion-icon
+            name="fitness-outline"
+            class="start-icon">
+          </ion-icon>
       </div>
 
       <div class="stat-card">
@@ -33,6 +37,10 @@
         <span class="label">
           Completados
         </span>
+        <ion-icon
+            name="checkmark-done-outline"
+            class="start-icon">
+          </ion-icon>
       </div>
 
       <div class="stat-card">
@@ -42,6 +50,10 @@
         <span class="label">
           Racha
         </span>
+        <ion-icon
+            name="flame-outline"
+            class="start-icon">
+          </ion-icon>
       </div>
 
       <div class="stat-card">
@@ -51,6 +63,10 @@
         <span class="label">
           Progreso
         </span>
+        <ion-icon
+            name="stats-chart-outline"
+            class="start-icon">
+          </ion-icon>
       </div>
 
     </section>
@@ -64,7 +80,7 @@
       [ngClass]="{'activo': filtroActual === 'completados'}">Completados</button>
     </section>
 
-    <section id="crear-habito" *ngIf="mostrarFormulario">
+    <section id="crear-habito" #formulario *ngIf="mostrarFormulario">
 
       <h3>Nuevo hábito</h3>
 
